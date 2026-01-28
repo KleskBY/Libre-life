@@ -1,0 +1,17 @@
+../data/menu.dat
+#define MENUQC 1
+menuqc/menudefs.qc
+keycodes.qc
+
+ui/ui.qc
+ui/ui_styles.qc
+ui/ui_elements.qc
+ui/ui_dropdown.qc
+ui/ui_scrollview.qc
+ui/ui_windows.qc
+
+menuqc/options.qc
+menuqc/load.qc
+menuqc/save.qc
+menuqc/server.qc
+menuqc/main.qc

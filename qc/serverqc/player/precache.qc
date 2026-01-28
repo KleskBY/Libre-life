@@ -1,0 +1,62 @@
+
+
+
+void Player_Precache()
+{
+	precache_sound("misc/talk.wav");
+	precache_sound("player/gib.wav");
+	precache_sound("player/pl_wade1.wav");
+	precache_sound("player/pl_wade2.wav");
+	precache_sound("misc/h2ohit1.wav");
+	precache_sound("player/jump1.wav");
+	precache_sound("player/pl_step1.wav");
+	precache_sound("player/pl_step2.wav");
+	precache_sound("player/pl_step3.wav");
+	precache_sound("player/pl_step4.wav");
+	precache_sound("player/pl_metal1.wav");
+	precache_sound("player/pl_metal2.wav");
+	precache_sound("player/pl_metal3.wav");
+	precache_sound("player/pl_metal4.wav");
+	precache_sound("player/pl_dirt1.wav");
+	precache_sound("player/pl_dirt2.wav");
+	precache_sound("player/pl_dirt3.wav");
+	precache_sound("player/pl_dirt4.wav");
+	precache_sound("player/pl_duct1.wav");
+	precache_sound("player/pl_duct2.wav");
+	precache_sound("player/pl_duct3.wav");
+	precache_sound("player/pl_duct4.wav");
+	precache_sound("player/pl_grate1.wav");
+	precache_sound("player/pl_grate2.wav");
+	precache_sound("player/pl_grate3.wav");
+	precache_sound("player/pl_grate4.wav");
+	precache_sound("player/pl_tile1.wav");
+	precache_sound("player/pl_tile2.wav");
+	precache_sound("player/pl_tile3.wav");
+	precache_sound("player/pl_tile4.wav");
+	precache_sound("player/pl_tile5.wav");
+	precache_sound("player/pl_slosh1.wav");
+	precache_sound("player/pl_slosh2.wav");
+	precache_sound("player/pl_slosh3.wav");
+	precache_sound("player/pl_slosh4.wav");
+	precache_sound("player/pl_wade3.wav");
+	precache_sound("player/pl_wade4.wav");
+	precache_sound("player/pl_ladder1.wav");
+	precache_sound("player/pl_ladder2.wav");
+	precache_sound("player/pl_ladder3.wav");
+	precache_sound("player/pl_ladder4.wav");
+	precache_sound("player/pl_pain5.wav");
+	precache_sound("player/pl_pain6.wav");
+	precache_sound("player/pl_pain7.wav");
+	precache_sound("common/wpn_select.wav");
+	precache_sound("common/wpn_denyselect.wav");
+	precache_sound("common/null.wav");
+	precache_sound("common/bodysplat.wav");
+	precache_sound("player/pl_swim1.wav");
+	precache_sound("player/pl_swim2.wav");
+	precache_sound("player/pl_swim3.wav");
+	precache_sound("player/pl_swim4.wav");
+	precache_sound("weapons/shell1.wav");
+	precache_sound("weapons/shell2.wav");
+	precache_sound("weapons/knife/hit.wav");
+	precache_sound("player/switch.wav");
+};

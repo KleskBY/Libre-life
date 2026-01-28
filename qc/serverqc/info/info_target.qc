@@ -1,0 +1,6 @@
+
+
+void info_target()
+{
+
+}
