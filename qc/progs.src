@@ -57,6 +57,7 @@ serverqc/func/func_breakable.qc
 serverqc/func/func_conveyor.qc
 serverqc/func/func_train.qc
 serverqc/func/func_rotating.qc
+serverqc/func/func_plat.qc
 
 serverqc/func/multi_manager.qc
 serverqc/func/multisource.qc

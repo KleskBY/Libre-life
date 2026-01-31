@@ -13,7 +13,7 @@ void Trigger_PushTouch()
 	if(other.solid == SOLID_NOT || other.solid == SOLID_BSP) 
 		return;
 	
-	other.velocity = other.velocity + (self.speed * self.movedir);
+	other.velocity = other.velocity + (self.speed * self.movedir * 0.01);
 	if(other.velocity_z > 0)
 		if (self.flags & FL_ONGROUND) self.flags = self.flags - FL_ONGROUND;
 	if(self.spawnflags & SF_TRIG_PUSH_ONCE)

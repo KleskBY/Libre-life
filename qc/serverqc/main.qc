@@ -80,6 +80,7 @@ void() worldspawn =
 	lightstyle(63, "a");// 63 testing
 	
 	RegisterStats();
+	cvar_set("sv_gravity", "800");
 };
 
 

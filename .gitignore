@@ -53,11 +53,13 @@ dkms.conf
 
 #Game resources
 *.pk3
+*.pak
 *.bsp
-*.iqm
-*.md3
-*.framegroups
+
 *.mdl
+*.md3
+*.iqm
+*.framegroups
 
 *.wav
 *.ogg
@@ -65,3 +67,6 @@ dkms.conf
 *.png
 *.jpg
 *.tga
+data/config.cfg
+*.lno
+zircon_history.txt

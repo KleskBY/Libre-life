@@ -20,7 +20,7 @@ void UI_DrawNewContents()
 	vector base = win_new.UI_win_pos + [font_size * 0.6, font_size * 2.0];
 	UI_Button2("Play Half-life", base + [font_size * 1, font_size * 7], [font_size * 11, font_size * 1.25], UI_Cmd, "maxplayers 1; map pod1\n");
 	UI_Button2("Play Half-life: Uplink", base + [font_size * 1, font_size * 9], [font_size * 11, font_size * 1.25], UI_Cmd, "echo 1\n");
-	UI_Button2("Cancel", base + [font_size * 9, font_size * 12], [font_size * 3, font_size * 1.25], UI_ToggleWindow, "New game");
+	UI_Button2("Cancel", base + [font_size * 9, font_size * 12], [font_size * 3, font_size * 1.25], UI_ToggleWindow, "New Game");
 
 	UI_Text("Select Difficulty", base + [font_size * 1]);
 	UI_Dropdown("skill", base + [font_size * 1, font_size * 1], font_size * 11, "Easy|Medium|Hard");

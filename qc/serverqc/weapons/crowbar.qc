@@ -253,10 +253,10 @@ float CROWBAR_Swing(float fFirst)
 			switch(RandomInt(0,1))
 			{
 			case 0:
-				sound(self, CHAN_ITEM, "weapons/cbar_hit1.wav", flVol, ATTN_NORM, 0, 98 + RandomInt(0,3)); 
+				sound7(self, CHAN_ITEM, "weapons/cbar_hit1.wav", flVol, ATTN_NORM, 98 + RandomInt(0,3), 0); 
 				break;
 			case 1:
-				sound(self, CHAN_ITEM, "weapons/cbar_hit2.wav", flVol, ATTN_NORM, 0, 98 + RandomInt(0,3)); 
+				sound7(self, CHAN_ITEM, "weapons/cbar_hit2.wav", flVol, ATTN_NORM, 98 + RandomInt(0,3), 0); 
 				break;
 			}
 		}
@@ -264,7 +264,8 @@ float CROWBAR_Swing(float fFirst)
 		self.attack_finished = time + (CROWBAR_RATE / 2); //m_flNextPrimaryAttack = GetNextAttackDelay(0.25);
 		self.think = Player_Think;
 		self.nextthink = time + 0.2;
-	}	
+	}
+	return fDidHit;
 }
 
 void CROWBAR_Attack()
@@ -289,7 +290,7 @@ void CROWBAR_Select()
 	self.currentClip = 1;
 	self.weaponframe = 0;
 	self.weaponmodel = CROWBAR_VIEW_MODEL;
-	setmodel(self, CROWBAR_PLAYER_MODEL);
+	// setmodel(self, CROWBAR_PLAYER_MODEL);
 	self.weaponSwitch = CROWBAR_Switch;
 	self.weaponAttack = CROWBAR_Attack;
 	self.weaponReload = SUB_Null;

@@ -6,7 +6,7 @@ void Trigger_GravityTouch()
 	if(other.classname != "player")
 		return;
 	
-	cvar_set("sv_gravity", ftos(self.gravity));
+	cvar_set("sv_gravity", ftos(800 * self.gravity));
 
 }
 

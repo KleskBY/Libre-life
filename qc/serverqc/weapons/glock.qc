@@ -103,7 +103,7 @@ void GLOCK_Select()
 {
 	self.currentClip = self.GLOCK_CLIP;
 	self.weaponmodel = GLOCK_VIEW_MODEL;
-	setmodel(self, GLOCK_PLAYER_MODEL);
+	// setmodel(self, GLOCK_PLAYER_MODEL);
 	self.weaponSwitch = GLOCK_Switch;
 	self.weaponAttack = GLOCK_PrimaryAttack;
 	self.weaponAttack2 = GLOCK_SecondaryAttack;
