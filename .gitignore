@@ -71,3 +71,7 @@ data/config.cfg
 zircon_history.txt
 conhistory.txt
 /data/textures
+
+
+
+!/data/maps/pod1.bsp
