@@ -29,7 +29,7 @@ c1a3yellow2
     }
 }
 
-water4b
+water4b2
 {
 	qer_trans 0.50
 	qer_nocarve

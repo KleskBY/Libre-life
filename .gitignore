@@ -64,9 +64,10 @@ dkms.conf
 *.wav
 *.ogg
 
-*.png
 *.jpg
 *.tga
 data/config.cfg
 *.lno
 zircon_history.txt
+conhistory.txt
+/data/textures
