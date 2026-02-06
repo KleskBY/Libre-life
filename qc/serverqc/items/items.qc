@@ -27,6 +27,19 @@
 
 #define MAX_WEAPONS			32
 
+#define VECTOR_CONE_1DEGREES	'0.00873 0.00873 0.00873'
+#define VECTOR_CONE_2DEGREES	'0.01745 0.01745 0.01745'
+#define VECTOR_CONE_3DEGREES	'0.02618 0.02618 0.02618'
+#define VECTOR_CONE_4DEGREES	'0.03490 0.03490 0.03490'
+#define VECTOR_CONE_5DEGREES	'0.04362 0.04362 0.04362'
+#define VECTOR_CONE_6DEGREES	'0.05234 0.05234 0.05234'
+#define VECTOR_CONE_7DEGREES	'0.06105 0.06105 0.06105'
+#define VECTOR_CONE_8DEGREES	'0.06976 0.06976 0.06976'
+#define VECTOR_CONE_9DEGREES	'0.07846 0.07846 0.07846'
+#define VECTOR_CONE_10DEGREES	'0.08716 0.08716 0.08716'
+#define VECTOR_CONE_15DEGREES	'0.13053 0.13053 0.13053'
+#define VECTOR_CONE_20DEGREES	'0.17365 0.17365 0.17365'
+
 void Item_Respawn()
 {
 	self.model = self.mdl;		// restore original model
@@ -34,8 +47,6 @@ void Item_Respawn()
 	sound (self, CHAN_VOICE, "misc/item_respawn.wav", 1, ATTN_NORM);	// play respawn sound
 	setorigin (self, self.origin);
 }
-
-
 
 void Item_Finish()
 {
@@ -100,19 +111,36 @@ void Item_Start()
 	self.touch = Item_Touch;
 }
 
+void CROWBAR_Precache();
 void weapon_crowbar()
 {
-	precache_model("models/v_crowbar.iqm");
-	precache_model("models/w_crowbar.iqm");
-	precache_model("models/p_crowbar.iqm");
-	precache_sound("weapons/cbar_hit1.wav");
-	precache_sound("weapons/cbar_hit2.wav");
-	precache_sound("weapons/cbar_hitbod1.wav");
-	precache_sound("weapons/cbar_hitbod2.wav");
-	precache_sound("weapons/cbar_hitbod3.wav");
-	precache_sound("weapons/cbar_miss1.wav");
+	CROWBAR_Precache();
 	setmodel(self, "models/w_crowbar.iqm");
 	self.weapon = WEAPON_CROWBAR;
 	self.netname = "crowbar";
+	Item_Start();
+}
+
+void GLOCK_Precache();
+void weapon_9mmhandgun()
+{
+	self.classname = "weapon_9mmhandgun";
+	GLOCK_Precache();
+	setmodel(self, "models/w_crowbar.iqm");
+	self.weapon = WEAPON_CROWBAR;
+	self.netname = "glock";
+	Item_Start();
+}
+
+
+
+void MP5_Precache();
+void weapon_9mmAR()
+{
+	self.classname = "weapon_9mmAR"; // hack to allow for old names
+	MP5_Precache();
+	setmodel(self, "models/w_9mmar.iqm");
+	self.weapon = WEAPON_MP5;
+	self.netname = "MP5";
 	Item_Start();
 }

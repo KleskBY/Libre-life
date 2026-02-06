@@ -59,4 +59,7 @@ void Player_Precache()
 	precache_sound("weapons/shell2.wav");
 	precache_sound("weapons/knife/hit.wav");
 	precache_sound("player/switch.wav");
+	precache_sound("items/gunpickup2.wav");
+	precache_sound("misc/item_respawn.wav");
+
 };

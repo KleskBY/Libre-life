@@ -21,6 +21,7 @@ serverqc/items/items.qc
 serverqc/weapons/weapons.qc
 serverqc/weapons/crowbar.qc
 serverqc/weapons/glock.qc
+serverqc/weapons/mp5.qc
 
 serverqc/player/precache.qc
 serverqc/player/swim.qc
@@ -31,6 +32,7 @@ serverqc/player/stance.qc
 serverqc/player/movefix.qc
 serverqc/player/observer.qc
 serverqc/player/death.qc
+serverqc/player/flashlight.qc
 serverqc/player/player.qc
 serverqc/client.qc
 
@@ -86,6 +88,7 @@ serverqc/func/env_explosion.qc
 
 
 serverqc/func/monster_generic.qc
+serverqc/sv.qc
 
 serverqc/warnfix.qc
 

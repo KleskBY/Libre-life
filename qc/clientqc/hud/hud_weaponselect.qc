@@ -80,9 +80,9 @@ void HUD_ParseWeaponData(float weapons)
 		hud_col5_img[i] = "";
 	}
 
-	if(weapons & WP_KNIFE) HUD_PushBack(1, "gfx/hud/knife");
-	if(weapons & WP_PISTOL) HUD_PushBack(2, "gfx/hud/pm");
-	if(weapons & WP_AK74) HUD_PushBack(3, "gfx/hud/ak74");
+	if(weapons & WP_KNIFE) HUD_PushBack(1, "sprites/weapon_crowbar_weapon");
+	if(weapons & WP_PISTOL) HUD_PushBack(2, "sprites/weapon_9mmhandgun_weapon");
+	if(weapons & WP_AK74) HUD_PushBack(3, "sprites/weapon_9mmar_weapon");
 	if(weapons & WP_VAL) HUD_PushBack(3, "gfx/hud/val");
 	if(weapons & WP_OC14) HUD_PushBack(3, "gfx/hud/oc14");
 	if(weapons & WP_SHOTGUN) HUD_PushBack(4, "gfx/hud/ks23");
@@ -117,9 +117,9 @@ void HUD_SelectWeapon()
 	hud_col_selected = 0;
 	hud_row_selected = 0;
 	
-	if(StringContains(s, "knife")) localcmd("impulse 1\n");
-	if(StringContains(s, "pm")) localcmd("impulse 2\n");
-	if(StringContains(s, "ak74")) localcmd("impulse 3\n");
+	if(StringContains(s, "crowbar")) localcmd("impulse 1\n");
+	if(StringContains(s, "9mmhandgun")) localcmd("impulse 2\n");
+	if(StringContains(s, "9mmar")) localcmd("impulse 3\n");
 	if(StringContains(s, "ks23")) localcmd("impulse 4\n");
 	if(StringContains(s, "val")) localcmd("impulse 5\n");
 	if(StringContains(s, "svd")) localcmd("impulse 6\n");

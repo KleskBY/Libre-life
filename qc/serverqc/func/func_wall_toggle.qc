@@ -15,6 +15,8 @@ void FuncWallToggle_TurnOn()
 {
 	self.solid = SOLID_BSP;
 	if(self.effects & EF_NODRAW) self.effects = self.effects - EF_NODRAW;
+	if(self.rendermode == 4) 
+		self.effects = EF_NODRAW;
 	setorigin(self, self.origin);
 }
 
@@ -47,4 +49,6 @@ void func_wall_toggle()
 	setmodel (self, self.model);
 	if (self.spawnflags & SF_WALL_START_OFF)
 		FuncWallToggle_TurnOff();
+	if(self.rendermode == 4) 
+		self.effects = EF_NODRAW;
 };

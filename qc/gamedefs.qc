@@ -255,6 +255,7 @@ float STAT_WEAPONS = 44;
 
 .float object_caps; // FCAP object capabilities
 .float radius;
+.float rendermode;
 
 float StringContains(string str, string needle)
 {
@@ -289,12 +290,18 @@ void RegisterCvar(string cv, string def)
 
 void RegisterCustomCvars()
 {
-	RegisterCvar("cl_hud", "1");
+	RegisterCvar("hud_draw", "1");
 	RegisterCvar("hud_fastswitch", "0");
 	RegisterCvar("bot_stop", "0");
 	RegisterCvar("gamemode", "0");
 	RegisterCvar("antiafk", "0");
 	RegisterCvar("crosshair_static", "1");
+	RegisterCvar("landmark", "");
+	RegisterCvar("landmark_pos", "");
+	RegisterCvar("landmark_player_pos", "");
+	RegisterCvar("landmark_player_angles", "");
+	RegisterCvar("landmark_player_velocity", "");
+	
 	
 	#ifndef MENUQC
 	registercommand("flashlight");

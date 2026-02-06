@@ -6,7 +6,7 @@
 
 void HUD_Draw()
 {
-	if(intermission || !cvar("cl_hud") || cvar("viewsize") > 100) return;
+	if(intermission || !cvar("hud_draw") || cvar("viewsize") > 100) return;
 	if(!Player_IsAlive()) return;
 	if(scoping) return;
 	

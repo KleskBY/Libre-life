@@ -8,6 +8,7 @@ void ClientConnect()
 }
 void(vector center, float amplitude, float frequency, float duration, float radius) UTIL_ScreenShake;
 void Player_Precache();
+entity ChangeLevel_FindLandmark(string pLandmarkName);
 void PutClientInServer()
 {
 	Player_Precache();
@@ -34,22 +35,40 @@ void PutClientInServer()
 	self.deadflag = DEAD_NO;
 	self.pausetime = 0; // paustime is set by teleporters to keep the player from moving a while
 	
-	self.origin = self.oldorigin = spot.origin + '0 0 1';	// 1998-07-21 Respawning where player died fix by Robert Field
-	self.angles = spot.angles;
+	if(strlen(cvar_string("landmark")) > 1)
+	{
+		entity landmark = ChangeLevel_FindLandmark(cvar_string("landmark"));
+		if(!landmark)
+		{
+			self.origin = self.oldorigin = spot.origin + '0 0 1';	// 1998-07-21 Respawning where player died fix by Robert Field
+			self.angles = spot.angles;
+		}
+		else
+		{
+			vector old_spot = stov(cvar_string("landmark_pos"));
+			vector offset = landmark.origin - old_spot;
+			vector old_pos = stov(cvar_string("landmark_player_pos"));
+			vector new_pos = old_pos + offset;
+			// setorigin(self, new_pos);
+			self.origin = self.oldorigin = new_pos;
+			self.angles = stov(cvar_string("landmark_player_angles"));
+			self.velocity = stov(cvar_string("landmark_player_velocity"));
+		}
+	}
+	else
+	{
+		self.origin = self.oldorigin = spot.origin + '0 0 1';	// 1998-07-21 Respawning where player died fix by Robert Field
+		self.angles = spot.angles;
+		self.velocity = '0 0 0';
+	}
 	self.fixangle = TRUE;		// turn this way immediately
 
 	precache_model("models/v_crowbar.iqm");
 	setmodel(self, "models/v_crowbar.iqm");
 	setsize(self, VEC_HULL_MIN, VEC_HULL_MAX);
 	self.view_ofs = '0 0 32';
-	self.velocity = '0 0 0';
 	
-	entity hat = spawn();
-	precache_model("models/hat.md3");
-	setmodel(hat, "models/hat.md3");
-	setattachment(hat, self, "tag_head");
-	hat.angles = '90 0 -90';
-	hat.origin = '0 0 -4';
+	
 	// UTIL_ScreenShake(self.origin, 5, 2, 100, 99999);
 }
 

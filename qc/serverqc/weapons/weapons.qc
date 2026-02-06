@@ -19,7 +19,7 @@ void Shell_Touch()
 }
 
 
-void Shell_Eject(vector org, string mdl)
+void Shell_Eject(string mdl, vector offset)
 {	
 	makevectors(self.v_angle);
 	newmis = spawn();
@@ -29,24 +29,57 @@ void Shell_Eject(vector org, string mdl)
 	else newmis.solid = SOLID_NOT;
 	newmis.angles = v_forward * (random() + 1);
 	newmis.classname = "shell";
-	newmis.touch = Shell_Touch;
-	newmis.think = SUB_Remove;
-	newmis.owner = self;
-	newmis.nextthink = time + 1.5;
 	setmodel (newmis, mdl);
 	setsize (newmis, VEC_ORIGIN, VEC_ORIGIN);
-	setorigin (newmis, org);
+	setorigin (newmis, self.origin + self.view_ofs + v_forward * offset_x + v_right * offset_y + v_up * offset_z);
 	newmis.avelocity_x = random(4000, 9000);
 	newmis.avelocity_y = random(4000, 9000);
 	newmis.velocity = (v_forward * random(10, 20)) + (v_right * random(60, 120)) + (v_up * random(70, 110));
+	newmis.touch = Shell_Touch;
+	newmis.think = SUB_Remove;
+	newmis.nextthink = time + 1.5;
 };
+
+
+/*
+	================
+	Muzzle
+	================
+*/
+entity Sprite_Create(string pSpriteName, vector origin, float animate);
+void Weapon_Muzzleflash(vector org, float scl)
+{
+	newmis = spawn();
+	newmis = Sprite_Create("sprites/muzzleflash.spr", org, TRUE);
+	newmis.movetype = MOVETYPE_NONE;
+	newmis.solid = SOLID_NOT;
+	newmis.viewmodelforclient = self;
+	newmis.owner = self;
+	newmis.alpha = 0.7;
+	newmis.effects = EF_FULLBRIGHT;
+	// if(random() >= 0.5) setmodel(newmis, "models/weapons/muzzle2.md3");
+	// else setmodel(newmis, "models/weapons/muzzle1.md3");
+	newmis.scale = scl;
+	setsize(newmis, '0 0 0', '0 0 0');
+	setorigin(newmis, org);
+	newmis.angles_z = random(0, 359);
+	newmis.nextthink = time + 0.05;
+	newmis.think = SUB_Remove;
+	// Sprite_Create("sprites/muzzleflash1.spr", org, TRUE);
+}
+
+
+
+
 
 void CROWBAR_Select();
 void GLOCK_Select();
+void MP5_Select();
 void Weapon_Update()
 {
 	if(self.weapon == WEAPON_CROWBAR) CROWBAR_Select();
 	else if(self.weapon == WEAPON_GLOCK) GLOCK_Select();
+	else if(self.weapon == WEAPON_MP5) MP5_Select();
 }
 void Weapon_SetCurrentAmmo()
 {
@@ -139,7 +172,7 @@ void Weapon_Change()
 	Weapon_SetCurrentAmmo();
 	if (!self.currentammo && !self.currentClip) 
 	{ 
-		sprint (self, "No ammo\n"); 
+		sprint(self, "No ammo\n"); 
 		self.weapon = oldweap;
 		Weapon_SetCurrentAmmo();
 		return; 

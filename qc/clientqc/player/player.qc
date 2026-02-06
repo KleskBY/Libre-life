@@ -120,8 +120,8 @@ void Player_Update()
 	SprintAnimation();
 	LookAt();
 	
-	input_movevalues = normalize(input_movevalues) * cvar("cl_forwardspeed"); //clamp strafe speed
-	setproperty(VF_CL_VIEWANGLES, input_angles + [ view_punchangle_x * 3 * frametime, view_punchangle_y * 3 * frametime]); //recoil
+	// input_movevalues = normalize(input_movevalues) * cvar("cl_forwardspeed"); //clamp strafe speed
+	// setproperty(VF_CL_VIEWANGLES, input_angles + [ view_punchangle_x * 3 * frametime, view_punchangle_y * 3 * frametime]); //recoil
 }
 
 void Player_GetFields()

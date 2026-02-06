@@ -58,13 +58,13 @@ void EnvExplosion_Use()
 	// draw fireball
 	if ( !( self.spawnflags & SF_ENVEXPLOSION_NOFIREBALL ) )
 	{
-		// te_explosion(self.origin);
-		Sprite_Create("sprites/zerogxplode.spr", self.origin, TRUE);
+		te_explosion(self.origin);
+		// Sprite_Create("sprites/zerogxplode.spr", self.origin, TRUE);
 	}
 	else //no sprite
 	{
-		// te_explosion(self.origin);
-		Sprite_Create("sprites/zerogxplode.spr", self.origin, TRUE);
+		te_explosion(self.origin);
+		// Sprite_Create("sprites/zerogxplode.spr", self.origin, TRUE);
 	}
 
 	// do damage

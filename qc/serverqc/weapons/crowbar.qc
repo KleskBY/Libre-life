@@ -156,13 +156,15 @@ float CROWBAR_ATTACK_END_FRAME = 35;
 float CROWBAR_FRAMERATE = 0.01;
 
 string CROWBAR_VIEW_MODEL = 	"models/v_crowbar.iqm";
-string CROWBAR_PLAYER_MODEL = 	"models/players/ussr_melee.md3";
-string CROWBAR_WORLD_MODEL = 	"models/weapons/w_knife.md3";
+string CROWBAR_PLAYER_MODEL = 	"models/p_crowbar.iqm";
+string CROWBAR_WORLD_MODEL = 	"models/w_crowbar.iqm";
 
-string CROWBAR_FIRE_SOUND = 	"weapons/knife/hit.wav";
-string CROWBAR_WHOOSH1_SOUND = 	"weapons/knife/whoosh1.wav";
-string CROWBAR_WHOOSH2_SOUND = 	"weapons/knife/whoosh2.wav";
-string CROWBAR_MISS_SOUND = 	"weapons/knife/miss.wav";
+string CROWBAR_HIT1_SOUND = 	"weapons/cbar_hit1.wav";
+string CROWBAR_HIT2_SOUND = 	"weapons/cbar_hit2.wav";
+string CROWBAR_HITBOD1_SOUND = 	"weapons/cbar_hitbod1.wav";
+string CROWBAR_HITBOD2_SOUND = 	"weapons/cbar_hitbod2.wav";
+string CROWBAR_HITBOD3_SOUND = 	"weapons/cbar_hitbod3.wav";
+string CROWBAR_MISS_SOUND = 	"weapons/cbar_miss1.wav";
 
 //ANIMS
 #define	CROWBAR_IDLE 		0
@@ -230,11 +232,11 @@ float CROWBAR_Swing(float fFirst)
 				switch(RandomInt(0,2))
 				{
 				case 0:
-					sound(self, CHAN_ITEM, "weapons/cbar_hitbod1.wav", flVol, ATTN_NORM); break;
+					sound(self, CHAN_ITEM, CROWBAR_HITBOD1_SOUND, flVol, ATTN_NORM); break;
 				case 1:
-					sound(self, CHAN_ITEM, "weapons/cbar_hitbod2.wav", flVol, ATTN_NORM); break;
+					sound(self, CHAN_ITEM, CROWBAR_HITBOD2_SOUND, flVol, ATTN_NORM); break;
 				case 2:
-					sound(self, CHAN_ITEM, "weapons/cbar_hitbod3.wav", flVol, ATTN_NORM); break;
+					sound(self, CHAN_ITEM, CROWBAR_HITBOD3_SOUND, flVol, ATTN_NORM); break;
 				}
 				// self.owner.m_iWeaponVolume = CROWBAR_BODYHIT_VOLUME;
 				// if (IsAlive(pEntity))
@@ -253,10 +255,10 @@ float CROWBAR_Swing(float fFirst)
 			switch(RandomInt(0,1))
 			{
 			case 0:
-				sound7(self, CHAN_ITEM, "weapons/cbar_hit1.wav", flVol, ATTN_NORM, 98 + RandomInt(0,3), 0); 
+				sound7(self, CHAN_ITEM, CROWBAR_HIT1_SOUND, flVol, ATTN_NORM, 98 + RandomInt(0,3), 0); 
 				break;
 			case 1:
-				sound7(self, CHAN_ITEM, "weapons/cbar_hit2.wav", flVol, ATTN_NORM, 98 + RandomInt(0,3), 0); 
+				sound7(self, CHAN_ITEM, CROWBAR_HIT2_SOUND, flVol, ATTN_NORM, 98 + RandomInt(0,3), 0); 
 				break;
 			}
 		}
@@ -305,10 +307,12 @@ void CROWBAR_Precache()
 	precache_model(CROWBAR_VIEW_MODEL);
 	precache_model(CROWBAR_PLAYER_MODEL);
 	precache_model(CROWBAR_WORLD_MODEL);
-	precache_sound(CROWBAR_FIRE_SOUND);
-	precache_sound(CROWBAR_WHOOSH1_SOUND);
-	precache_sound(CROWBAR_WHOOSH2_SOUND);
+	precache_sound(CROWBAR_HIT1_SOUND);
+	precache_sound(CROWBAR_HIT2_SOUND);
 	precache_sound(CROWBAR_MISS_SOUND);
+	precache_sound(CROWBAR_HITBOD1_SOUND);
+	precache_sound(CROWBAR_HITBOD2_SOUND);
+	precache_sound(CROWBAR_HITBOD3_SOUND);
 }
 
 

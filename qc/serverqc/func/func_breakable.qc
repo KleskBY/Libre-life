@@ -417,7 +417,7 @@ void Breakable_Precache()
 	switch (self.material) 
 	{
 	case matWood:
-		pGibName = "models/woodgibs.mdl";
+		pGibName = "models/woodgibs.iqm";
 		precache_sound("debris/bustcrate1.wav");
 		precache_sound("debris/bustcrate2.wav");
 		precache_sound("debris/wood1.wav");
@@ -425,7 +425,7 @@ void Breakable_Precache()
 		precache_sound("debris/wood3.wav");
 		break;
 	case matFlesh:
-		pGibName = "models/fleshgibs.mdl";
+		pGibName = "models/fleshgibs.iqm";
 		precache_sound("debris/bustflesh1.wav");
 		precache_sound("debris/bustflesh2.wav");
 		precache_sound("debris/flesh1.wav");
@@ -438,7 +438,7 @@ void Breakable_Precache()
 	case matComputer:
 		precache_sound("buttons/spark5.wav");
 		precache_sound("buttons/spark6.wav");
-		pGibName = "models/computergibs.mdl";
+		pGibName = "models/computergibs.iqm";
 		precache_sound("debris/bustmetal1.wav");
 		precache_sound("debris/bustmetal2.wav");
 		precache_sound("debris/glass1.wav");
@@ -447,7 +447,7 @@ void Breakable_Precache()
 		break;
 	case matUnbreakableGlass:
 	case matGlass:
-		pGibName = "models/glassgibs.mdl";
+		pGibName = "models/glassgibs.iqm";
 		precache_sound("debris/bustglass1.wav");
 		precache_sound("debris/bustglass2.wav");
 		precache_sound("debris/glass1.wav");
@@ -455,7 +455,7 @@ void Breakable_Precache()
 		precache_sound("debris/glass3.wav");
 		break;
 	case matMetal:
-		pGibName = "models/metalplategibs.mdl";
+		pGibName = "models/metalplategibs.iqm";
 		precache_sound("debris/bustmetal1.wav");
 		precache_sound("debris/bustmetal2.wav");
 		precache_sound("debris/metal1.wav");
@@ -463,7 +463,7 @@ void Breakable_Precache()
 		precache_sound("debris/metal3.wav");
 		break;
 	case matCinderBlock:
-		pGibName = "models/cindergibs.mdl";
+		pGibName = "models/cindergibs.iqm";
 		precache_sound("debris/bustconcrete1.wav");
 		precache_sound("debris/bustconcrete2.wav");
 		precache_sound("debris/concrete1.wav");
@@ -471,7 +471,7 @@ void Breakable_Precache()
 		precache_sound("debris/concrete3.wav");
 		break;
 	case matRocks:
-		pGibName = "models/rockgibs.mdl";
+		pGibName = "models/rockgibs.iqm";
 		precache_sound("debris/bustconcrete1.wav");
 		precache_sound("debris/bustconcrete2.wav");
 		precache_sound("debris/concrete1.wav");
@@ -479,7 +479,7 @@ void Breakable_Precache()
 		precache_sound("debris/concrete3.wav");
 		break;
 	case matCeilingTile:
-		pGibName = "models/ceilinggibs.mdl";
+		pGibName = "models/ceilinggibs.iqm";
 		precache_sound("debris/bustceiling.wav");  
 		break;
 	}
