@@ -1,0 +1,4 @@
+#pragma noref 1
+#pragma sourcefile serverqc/serverqc.src
+#pragma sourcefile clientqc/clientqc.src
+#pragma sourcefile menuqc/menuqc.src

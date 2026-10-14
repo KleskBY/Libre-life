@@ -1,0 +1,4 @@
+
+void info_landmark()
+{
+}

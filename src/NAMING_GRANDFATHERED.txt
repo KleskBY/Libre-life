@@ -1,0 +1,47 @@
+# Deliberate naming exceptions -- these are NOT mistakes, do not "fix" them.
+# Hand-maintained companion to NAMING_LOCKED.txt (which is generated).
+#
+# Unlike NAMING_LOCKED.txt, renaming these would be *safe*; it is simply not
+# wanted. They are either established Quake lineage, documented public API, or
+# genuine acronyms where the alternative reads worse.
+
+# --- Quake lineage / documented public API ---
+SUB_            # SUB_UseTargets, SUB_CalcMove, ... see docs/guide/
+T_Damage        # documented damage entry point
+T_RadiusDamage
+T_Heal
+anglemod        # stock Quake
+
+# --- acronym prefixes: expanding these reads worse, not better ---
+UI_             # 134 fns, 100% internally consistent across clientqc + menuqc
+HUD_
+PM_
+SV_
+CSQC_           # engine-called entrypoints -- also effectively locked
+
+# --- weapon prefixes: kept ALLCAPS as a family, by project decision ---
+MP5_
+RPG_
+EGON_
+GAUSS_
+GLOCK_
+PYTHON_
+SHOTGUN_
+SNARK_
+CROWBAR_
+CROSSBOW_
+TRIPMINE_
+SATCHEL_
+HANDGRENADE_
+HGUN_
+
+# --- established monster abbreviations (>=20 uses each) ---
+Garg_
+HGrunt_
+HAssn_
+
+# --- .usehl signature parameter names ---
+# Renaming these to `activator` would shadow the real global (gamedefs.qc) in
+# ~300 places, and they are the documented Half-Life-style Use signature.
+pActivator
+pCaller

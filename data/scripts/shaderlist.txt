@@ -1,0 +1,15 @@
+// shaderlist.txt
+//
+// Read by the map compiler (q3map2), NOT by the runtime engine. FTE /
+// DarkPlaces / Zircon auto-load every scripts/*.shader at load time, so
+// in-game rendering does not depend on this file. It exists only so that
+// q3map2 knows which shader files to pull surface definitions from when
+// compiling a map that references these custom shaders. One shader-file
+// base name per line (no .shader extension). Keep in sync with the
+// scripts/*.shader set.
+
+chrome
+hassassin
+hl
+hl_liquids
+hologram

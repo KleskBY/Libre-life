@@ -1,0 +1,20 @@
+../../data/menu.dat
+#define MENUQC 1
+#define MENU 1
+menudefs.qc
+../keycodes.qc
+
+../ui/ui.qc
+../ui/ui_styles.qc
+../ui/ui_elements.qc
+../ui/ui_dropdown.qc
+../ui/ui_scrollview.qc
+../ui/ui_windows.qc
+
+playersetup.qc
+options.qc
+load.qc
+save.qc
+server.qc
+create.qc
+main.qc

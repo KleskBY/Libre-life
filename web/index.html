@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Play the Libre-life experimental FTEQW WebAssembly build in your browser.">
+  <title>Libre-life | Web Port</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="launcher.css">
+</head>
+<body>
+  <nav class="site-nav" aria-label="Web port navigation">
+    <a href="../" class="nav-logo" aria-label="Back to the Libre-life home page">LIBRE<span>-LIFE</span></a>
+    <span class="nav-context">WEB PORT // EXPERIMENTAL BUILD</span>
+  </nav>
+
+  <div class="app-shell">
+    <aside class="control-rail" aria-label="Game controls">
+      <a class="tool-button" href="../" aria-label="Mod home page" data-tooltip="Mod home">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5M5.5 10v10h13V10M9.5 20v-6h5v6"/></svg>
+      </a>
+      <span class="rail-divider" aria-hidden="true"></span>
+      <button class="tool-button" id="menu" disabled aria-label="Open game menu" data-tooltip="Menu">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 7h14M5 12h14M5 17h14"/></svg>
+      </button>
+      <button class="tool-button" id="settings" disabled aria-label="Open settings" data-tooltip="Settings">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 0 0-.1-1l2-1.5-2-3.4-2.4 1A7 7 0 0 0 15 6l-.4-2.6h-4L10 6a7 7 0 0 0-1.6 1.1l-2.4-1-2 3.4L6.1 11a7 7 0 0 0 0 2L4 14.5l2 3.4 2.4-1A7 7 0 0 0 10 18l.5 2.6h4L15 18a7 7 0 0 0 1.6-1.1l2.4 1 2-3.4-2.1-1.5a7 7 0 0 0 .1-1Z"/></svg>
+      </button>
+      <button class="tool-button" id="resume" disabled aria-label="Resume game" data-tooltip="Resume">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 5 11 7-11 7Z"/></svg>
+      </button>
+      <button class="tool-button" id="fullscreen" disabled aria-label="Enter fullscreen" data-tooltip="Fullscreen">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4H4v5M15 4h5v5M9 20H4v-5M15 20h5v-5"/></svg>
+      </button>
+    </aside>
+
+    <main>
+      <section class="game-frame">
+        <div id="launcher">
+          <div class="vignette" aria-hidden="true"></div>
+          <div class="launcher-content">
+            <img class="launcher-logo" src="assets/logo.webp" width="800" height="507" alt="Libre-life">
+            <p class="section-label">FTEQW // WEBASSEMBLY</p>
+            <h1>Play the development build</h1>
+            <p class="launcher-copy">Run Quake Shareware, Half-Life: Uplink, or the Hazard Course directly in your browser.</p>
+            <i class="launcher-copy">Please note that browser port is in beta and looks significantly worse.</i>
+            <div class="launch-panel">
+              <label for="map">Starting point</label>
+              <div class="launch-row">
+                <select id="map" disabled></select>
+                <button id="play" disabled>Loading build information…</button>
+              </div>
+              <p id="build-info"></p>
+            </div>
+          </div>
+        </div>
+        <canvas id="canvas" width="1280" height="720" tabindex="0" aria-label="Libre-life game" hidden></canvas>
+      </section>
+
+      <div class="runtime-status">
+        <span class="status-light" aria-hidden="true"></span>
+        <p id="status" role="status" aria-live="polite">Preparing launcher…</p>
+      </div>
+      <progress id="progress" max="1" value="0" hidden></progress>
+
+      <div class="key-strip" aria-label="Keyboard controls">
+        <span><kbd>WASD</kbd> Move</span><span><kbd>Mouse</kbd> Aim</span><span><kbd>LMB</kbd> Fire</span><span><kbd>RMB</kbd> Aim / zoom</span><span><kbd>E</kbd> Use</span><span><kbd>Space</kbd> Jump</span><span><kbd>C</kbd> Crouch</span><span><kbd>Shift</kbd> Sprint</span><span><kbd>R</kbd> Reload</span><span><kbd>G</kbd> Grenade</span><span><kbd>H</kbd> Heal</span><span><kbd>F</kbd> Flashlight</span><span><kbd>Wheel</kbd> Weapons</span><span><kbd>Tab</kbd> Scores</span><span><kbd>P</kbd> Menu</span>
+      </div>
+
+      <details>
+        <summary>Engine log</summary>
+        <pre id="log"></pre>
+      </details>
+    </main>
+  </div>
+
+  <footer>
+    <div class="footer-logo">LIBRE-LIFE</div>
+    <p>Half-Life, reimplemented in QuakeC // Experimental browser build</p>
+    <p>Esc releases the mouse. Browser Ctrl shortcuts remain reserved.</p>
+  </footer>
+  <script>
+  // On-screen buttons for phones/tablets (touch.js). x/y: % from right/bottom edge.
+  window.TOUCH_BUTTONS = [
+    {id: 'jump', label: 'Jump', command: '+jump', hold: true, x: 4, y: 6, size: 60},
+    {id: 'fire', label: 'Fire', command: '+attack', hold: true, x: 4, y: 28, size: 80},
+    {id: 'aim', label: 'Aim', command: '+button6', hold: true, x: 4, y: 58, size: 54},
+    {id: 'duck', label: 'Duck', command: '+button3', hold: true, x: 15, y: 6, size: 54},
+    {id: 'use', label: 'Use', command: '+use', hold: true, x: 16, y: 32, size: 54},
+    {id: 'reload', label: 'Rld', command: 'reload', x: 15, y: 58, size: 48},
+    {id: 'sprint', label: 'Run', command: '+button4', hold: true, x: 26, y: 6, size: 50},
+    {id: 'heal', label: 'Heal', command: 'heal', x: 27, y: 56, size: 46},
+    {id: 'next', label: 'Next', command: 'impulse 10', x: 14, y: 78, size: 46},
+    {id: 'prev', label: 'Prev', command: 'impulse 12', x: 22, y: 78, size: 46},
+    {id: 'light', label: 'Light', command: 'cmd flashlight', x: 30, y: 78, size: 48},
+    {id: 'grenade', label: 'Nade', command: 'grenade', x: 27, y: 30, size: 48},
+    {id: 'scores', label: 'Tab', command: '+showscores', hold: true, x: 38, y: 78, size: 44}
+  ];
+  </script>
+  <script src="touch.js"></script>
+  <script src="launcher.js"></script>
+</body>
+</html>

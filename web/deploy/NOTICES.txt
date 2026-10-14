@@ -1,0 +1,17 @@
+Libre-life demo deployment
+
+Game assets were assembled from the owner's local game directory. This package
+does not establish redistribution rights for those assets. Shareware/demo assets
+retain their original terms; common runtime assets also come from that directory.
+
+Source code and build tools are distributed separately through the project's
+GitHub repository: https://github.com/KleskBY/Libre-life (GPL-3.0).
+The baked font is derived from DejaVu Sans; see licenses/DejaVu-Fonts-License.txt.
+The web launcher reuses the mod homepage's Oswald and Share Tech Mono fonts;
+see licenses/OFL-Oswald.txt and licenses/OFL-ShareTechMono.txt.
+
+FTEQW is an upstream prebuilt WebAssembly engine, GPL-2.0. License text is in
+licenses/gpl-2.0.txt. Download origin and binary hashes are in
+engine/engine-lock.json. Upstream source: https://github.com/fte-team/fteqw
+The binary lock identifies the tested files, but does not establish the exact
+corresponding source revision or a reproducible engine build.

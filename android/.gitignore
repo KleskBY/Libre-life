@@ -1,0 +1,22 @@
+# Build output
+.gradle/
+build/
+build-out/
+app/build/
+app/.cxx/
+
+# Machine-specific
+local.properties
+
+# Signing material never belongs in the repo
+keystore.properties
+*.jks
+*.keystore
+
+# Generated game data (built by the game's own packaging tools)
+app/src/main/assets/
+
+# The repo-root .gitignore drops images everywhere (*.png, *.jpg). The app's own
+# resources must still be tracked or a fresh clone has no icon and will not build.
+!app/src/*/res/**/*.png
+!app/src/*/res/**/*.jpg

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Quake amber; the ObjectN flavor overrides this with its logo red -->
+    <color name="accent">#E8913A</color>
+</resources>

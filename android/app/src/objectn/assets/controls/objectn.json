@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "opacity": 1.0,
+  "scale": 1.0,
+  "stickZone": 0.45,
+  "controls": [
+    { "id": "fire",     "icon": "fire",     "type": "key",      "action": "MOUSE1",     "mode": "hold",   "show": "game",    "looks": true,  "x": 0.86, "y": 0.70, "size": 46 },
+    { "id": "aim",      "icon": "aim",      "type": "key",      "action": "MOUSE2",     "mode": "toggle", "show": "game",    "looks": true,  "x": 0.95, "y": 0.46, "size": 28 },
+    { "id": "jump",     "icon": "jump",     "type": "key",      "action": "SPACE",      "mode": "hold",   "show": "game",    "x": 0.72, "y": 0.86, "size": 30 },
+    { "id": "crouch",   "icon": "crouch",   "type": "key",      "action": "c",          "mode": "toggle", "show": "game",    "x": 0.95, "y": 0.88, "size": 26 },
+    { "id": "reload",   "icon": "reload",   "type": "key",      "action": "r",          "mode": "hold",   "show": "game",    "x": 0.74, "y": 0.58, "size": 26 },
+    { "id": "use",      "icon": "use",      "type": "key",      "action": "e",          "mode": "hold",   "show": "game",    "x": 0.62, "y": 0.72, "size": 26 },
+    { "id": "run",      "icon": "run",      "type": "key",      "action": "SHIFT",      "mode": "toggle", "show": "game",    "x": 0.08, "y": 0.40, "size": 24 },
+    { "id": "grenade",  "icon": "grenade",  "type": "key",      "action": "g",          "mode": "hold",   "show": "game",    "x": 0.84, "y": 0.36, "size": 22 },
+    { "id": "heal",     "icon": "heal",     "type": "key",      "action": "h",          "mode": "hold",   "show": "game",    "x": 0.74, "y": 0.36, "size": 22 },
+    { "id": "light",    "icon": "light",    "type": "key",      "action": "f",          "mode": "hold",   "show": "game",    "x": 0.64, "y": 0.12, "size": 20 },
+    { "id": "console",  "icon": "console",  "type": "key",      "action": "BACKQUOTE",  "mode": "tap",    "show": "both",    "x": 0.30, "y": 0.10, "size": 20 },
+    { "id": "keyboard", "icon": "keyboard", "type": "keyboard", "action": "",           "mode": "tap",    "show": "console", "x": 0.30, "y": 0.26, "size": 20 },
+    { "id": "next",     "icon": "next",     "type": "key",      "action": "MWHEELUP",   "mode": "tap",    "show": "game",    "x": 0.50, "y": 0.10, "size": 22 },
+    { "id": "prev",     "icon": "prev",     "type": "key",      "action": "MWHEELDOWN", "mode": "tap",    "show": "game",    "x": 0.40, "y": 0.10, "size": 22 },
+    { "id": "score",    "icon": "score",    "type": "key",      "action": "TAB",        "mode": "hold",   "show": "game",    "x": 0.78, "y": 0.12, "size": 20 },
+    { "id": "menu",     "icon": "menu",     "type": "key",      "action": "ESCAPE",     "mode": "tap",    "show": "both",    "x": 0.93, "y": 0.12, "size": 22 }
+  ]
+}

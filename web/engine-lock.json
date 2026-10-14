@@ -1,0 +1,10 @@
+{
+  "base_url": "https://fte.triptohell.info/moodles/dev/web/",
+  "source_url": "https://github.com/fte-team/fteqw",
+  "retrieved": "2026-09-07",
+  "files": {
+    "ftewebgl.js": "14e767330041aad580cb60b6d4f56caa19942f1b85b1fc77e9b4b24e12843938",
+    "ftewebgl.wasm": "d027110319593e730cddd5201e78d69d1007c6d8902f7ca561252dbab247cfd6"
+  },
+  "build": "Jul 23 2026"
+}

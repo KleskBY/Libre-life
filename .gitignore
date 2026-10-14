@@ -1,0 +1,136 @@
+
+# Secrets
+.env
+.env.*
+*.key
+*.pem
+*.p12
+*.pfx
+.*/
+!/.github/
+
+# Windows trash
+.DS_Store
+Thumbs.db
+desktop.ini
+*.lnk
+
+# Tools
+tools/*
+!tools/mdl2iqm
+!tools/QuakeGameBuilder
+!tools/convert_nod.pl
+!tools/gen_rtlights.py
+!tools/qc_common.py
+!tools/qc_doc.py
+!tools/web_bsp.py
+!tools/web_build.py
+!tools/web_config.py
+!tools/web_deploy.py
+!tools/web_font.py
+!tools/web_serve.py
+!tools/web_smoke.cjs
+!tools/web_zoom_smoke.cjs
+!tools/test_web_bsp.py
+!tools/test_web_config.py
+
+# Info
+/*.md
+!/README.md
+/docs/vendor/
+
+# Compiler
+/src/fteqcc*.exe
+/*.exe
+/*.dll
+/*.pdb
+/*.db
+/bin64/
+/librelife-*
+/installed.lst
+*.lno
+*.d
+*.o
+*.obj
+
+# Releases
+/data/*.dat
+/qualker/*.dat
+/dist/
+/release/
+/build*/
+*.zip
+*.7z
+
+# Trash
+/data/config.cfg
+/data/user.cfg
+/data/data/*.gs
+/data/saves/
+/data/data/maps/graphs/
+/data/glsl/combined_crc*.glsl_
+/data/dlcache/
+/data/screenshots/
+/data/data/*
+*.sav
+qconsole.log
+conhistory.txt
+zircon_history.txt
+zlog.txt
+scratch_*.txt
+data/darkplaces_iplog.txt
+data/zircon_log.log
+
+
+# Tools
+__pycache__/
+*.py[cod]
+
+# WIP
+/models/
+/images/
+
+# Game data
+*.pak
+*.pk3
+*.wad
+*.bsp
+*.bsp2
+*.mdl
+*.md3
+*.iqm
+*.framegroups
+*.skin
+*.bodyinfo
+*.events
+*.wav
+*.ogg
+*.spr
+*.png
+*.jpg
+*.jpeg
+*.tga
+*.lux
+*.ttf
+!/data/gfx/font.ttf
+*.bak
+/data/gfx/env/
+
+#valve
+/data/titles.txt
+/data/sound/sentences.txt
+
+#internal
+/zircon_beta_engine_source_20260806
+/stable_engine
+stable_engine (use this if you have problems).bat
+/qualker/
+/qualker.fmf
+/restriction
+/restriction.fmf
+/restriction_*.bat
+steam_appid.txt
+
+# Webport
+/work
+/web/qualker/

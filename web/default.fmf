@@ -1,0 +1,7 @@
+FTEManifestVer 1
+game data
+name "Libre-life Web"
+protocolname "librelife"
+basegame data
+disablehomedir 1
+mainconfig "web-user.cfg"
