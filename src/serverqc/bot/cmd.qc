@@ -1,4 +1,4 @@
-// `cmd bot ...`, and the debug dump.
+// bot_add, bot_kick, `cmd bot ...` diagnostics, and the debug dump.
 //
 // Last of the bot files in the manifest so it needs no prototypes, the same
 // arrangement anomaly_spawncmd.qc uses.
@@ -28,7 +28,7 @@ string Bot_BackendName()
 void Bot_DebugDump()
 {
 	sprint(self, strcat("bots: ", ftos(Bot_Count()), " of ",
-	                    ftos(rint(cvar("bot_count"))), ", backend ",
+	                    ftos(rint(cvar("bot_quota"))), ", backend ",
 	                    Bot_BackendName(), "\n"));
 	// Links matter more than nodes: a graph with nodes and no links routes
 	// nothing, and looks identical from the node count alone.
@@ -69,47 +69,56 @@ void Bot_DebugDump()
 	}
 }
 
-void Bot_Command()
+void Bot_CmdAdd(float n)
 {
-	string sub = argv(1);
-	float n = stof(argv(2));
+	if (n < 1) n = 1;
+	float added = 0;
+	for (float i = 0; i < n; i = i + 1)
+		if (Bot_Add(Bot_TeamsEnabled() ? Bot_TeamSmallest() : BOT_TEAM_NONE))
+			added = added + 1;
 
-	if (sub == "add")
-	{
-		if (n < 1) n = 1;
-		float added = 0;
-		for (float i = 0; i < n; i = i + 1)
-			if (Bot_Add(Bot_TeamsEnabled() ? Bot_TeamSmallest() : BOT_TEAM_NONE))
-				added = added + 1;
+	// Keep the manager in step, or the balancer removes what was just added.
+	cvar_set("bot_quota", ftos(Bot_Count()));
+	sprint(self, strcat("added ", ftos(added), " bot(s)\n"));
+}
 
-		// Keep the manager in step, or the balancer removes what was just added.
-		cvar_set("bot_count", ftos(Bot_Count()));
-		sprint(self, strcat("added ", ftos(added), " bot(s)\n"));
-		return;
-	}
+// A bot by its name with or without bot_prefix.
+entity Bot_FindByName(string who)
+{
+	string prefixed = strcat(cvar_string("bot_prefix"), who);
+	for (entity c = findchainflags(flags, FL_CLIENT); c; c = c.chain)
+		if (Bot_IsBot(c) && (c.netname == who || c.netname == prefixed))
+			return c;
+	return world;
+}
 
-	if (sub == "remove" || sub == "kick")
-	{
-		if (n < 1) n = 1;
-		for (float i = 0; i < n; i = i + 1)
-			Bot_Remove(Bot_PickRemoval(BOT_TEAM_NONE));
-		cvar_set("bot_count", ftos(Bot_Count()));
-		return;
-	}
-
-	if (sub == "kickall" || sub == "none")
+// No argument kicks every bot, as zBot does.
+void Bot_CmdKick(string who)
+{
+	if (who == "" || who == "all")
 	{
 		Bot_RemoveAll();
-		cvar_set("bot_count", "0");
+		cvar_set("bot_quota", "0");
 		return;
 	}
 
-	if (sub == "count")
+	entity b = Bot_FindByName(who);
+	if (!b)
 	{
-		cvar_set("bot_count", ftos(rint(n)));
-		sprint(self, strcat("bot count set to ", ftos(rint(n)), "\n"));
+		sprint(self, strcat("bot_kick: no bot named ", who, "\n"));
 		return;
 	}
+	Bot_Remove(b);
+	cvar_set("bot_quota", ftos(Bot_Count()));
+}
+
+void Bot_Command()
+{
+	string verb = argv(0);
+	if (verb == "bot_add")  { Bot_CmdAdd(stof(argv(1))); return; }
+	if (verb == "bot_kick") { Bot_CmdKick(argv(1)); return; }
+
+	string sub = argv(1);
 
 	if (sub == "debug")
 	{
@@ -131,5 +140,5 @@ void Bot_Command()
 		return;
 	}
 
-	sprint(self, "bot add [n] | remove [n] | kickall | count <n> | debug | stuckstats [reset]\n");
+	sprint(self, "bot_add [n] | bot_kick [name] | bot_quota <n> | cmd bot debug | cmd bot stuckstats [reset]\n");
 }

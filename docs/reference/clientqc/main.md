@@ -109,7 +109,7 @@ void CSQC_Parse_StuffCmd(string msg)
 
 > **FROZEN** — entrypoint:engine-invoked-name. Renaming this builds clean and fails silently at runtime.
 
-[`src/clientqc/main.qc:199`](../../../src/clientqc/main.qc#L199)
+[`src/clientqc/main.qc:204`](../../../src/clientqc/main.qc#L204)
 
 ### `CSQC_Init`
 
@@ -119,7 +119,7 @@ void CSQC_Init(void)
 
 > **FROZEN** — entrypoint:declared-in-engine-header, entrypoint:engine-invoked-name. Renaming this builds clean and fails silently at runtime.
 
-[`src/clientqc/main.qc:205`](../../../src/clientqc/main.qc#L205)
+[`src/clientqc/main.qc:210`](../../../src/clientqc/main.qc#L210)
 
 ### `CSQC_Shutdown`
 
@@ -129,7 +129,7 @@ void CSQC_Shutdown(void)
 
 > **FROZEN** — entrypoint:declared-in-engine-header, entrypoint:engine-invoked-name. Renaming this builds clean and fails silently at runtime.
 
-[`src/clientqc/main.qc:243`](../../../src/clientqc/main.qc#L243)
+[`src/clientqc/main.qc:250`](../../../src/clientqc/main.qc#L250)
 
 ### `CSQC_Ent_Update`
 
@@ -139,7 +139,7 @@ void CSQC_Ent_Update(float isnew)
 
 > **FROZEN** — entrypoint:engine-invoked-name. Renaming this builds clean and fails silently at runtime.
 
-[`src/clientqc/main.qc:247`](../../../src/clientqc/main.qc#L247)
+[`src/clientqc/main.qc:254`](../../../src/clientqc/main.qc#L254)
 
 ### `CSQC_Ent_Remove`
 
@@ -149,5 +149,5 @@ void CSQC_Ent_Remove()
 
 > **FROZEN** — entrypoint:engine-invoked-name. Renaming this builds clean and fails silently at runtime.
 
-[`src/clientqc/main.qc:285`](../../../src/clientqc/main.qc#L285)
+[`src/clientqc/main.qc:292`](../../../src/clientqc/main.qc#L292)
 

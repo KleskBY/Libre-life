@@ -134,6 +134,11 @@ float CSQC_ConsoleCommand(string strCommand)
 		Flashlight_Toggle();
 		return TRUE;
 	}
+	else if(command == "bot_add" || command == "bot_kick")
+	{
+		localcmd(strcat("cmd ", command, " \"", argv(1), "\"\n"));
+		return TRUE;
+	}
 	else if(command == "hudmsg")
 	{
 		return HudMessage_Parse(strCommand);
@@ -230,6 +235,8 @@ void CSQC_Init(void)
 	registercommand("sbdel");
 	registercommand("obit");
 	registercommand("ntag");
+	registercommand("bot_add");
+	registercommand("bot_kick");
 
 	// Rows pushed before this VM existed (changelevel reload, late csprogs load) were lost; ask for a full resend.
 	localcmd("cmd sbsync\n");

@@ -1,9 +1,15 @@
+#define LADDER_STEP_INTERVAL	0.5
+#define LADDER_STEP_VOLUME		0.7
+
 void Ladder_Sound()
 {
-	if(time + random(0, 0.1) > other.footstep_finished || other.footstep_finished == 0) 
-	{
-		other.footstep_finished = time + 0.5;
-	}
+	if (time + random(0, 0.1) < other.footstep_finished) return;
+
+	entity s = self;
+	self = other;
+	Player_PlayStepSound(STEP_LADDER, LADDER_STEP_VOLUME);
+	self = s;
+	other.footstep_finished = time + LADDER_STEP_INTERVAL;
 }
 
 void Ladder_Touch()

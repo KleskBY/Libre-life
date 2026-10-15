@@ -8,9 +8,9 @@ Every cvar name the QC reads or writes, and which VMs touch it. Cvar names are a
 | Cvar | Used by |
 | --- | --- |
 | `_sv_override_scientist_mdl` | SVQC |
-| `bot_count` | SVQC |
 | `bot_physics` | SVQC |
 | `bot_prefix` | SVQC |
+| `bot_quota` | SVQC |
 | `bot_skill` | SVQC |
 | `bot_wp_autogen` | SVQC |
 | `bot_wp_genrate` | SVQC |

@@ -13,7 +13,7 @@
 string Bot_StateName(float s)
 ```
 
-`cmd bot ...`, and the debug dump.
+bot_add, bot_kick, `cmd bot ...` diagnostics, and the debug dump.
 Last of the bot files in the manifest so it needs no prototypes, the same
 arrangement anomaly_spawncmd.qc uses.
 
@@ -35,11 +35,39 @@ void Bot_DebugDump()
 
 [`src/serverqc/bot/cmd.qc:28`](../../../../src/serverqc/bot/cmd.qc#L28)
 
+### `Bot_CmdAdd`
+
+```c
+void Bot_CmdAdd(float n)
+```
+
+[`src/serverqc/bot/cmd.qc:72`](../../../../src/serverqc/bot/cmd.qc#L72)
+
+### `Bot_FindByName`
+
+```c
+entity Bot_FindByName(string who)
+```
+
+A bot by its name with or without bot_prefix.
+
+[`src/serverqc/bot/cmd.qc:86`](../../../../src/serverqc/bot/cmd.qc#L86)
+
+### `Bot_CmdKick`
+
+```c
+void Bot_CmdKick(string who)
+```
+
+No argument kicks every bot, as zBot does.
+
+[`src/serverqc/bot/cmd.qc:96`](../../../../src/serverqc/bot/cmd.qc#L96)
+
 ### `Bot_Command`
 
 ```c
 void Bot_Command()
 ```
 
-[`src/serverqc/bot/cmd.qc:72`](../../../../src/serverqc/bot/cmd.qc#L72)
+[`src/serverqc/bot/cmd.qc:115`](../../../../src/serverqc/bot/cmd.qc#L115)
 

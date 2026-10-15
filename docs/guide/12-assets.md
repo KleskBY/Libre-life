@@ -123,8 +123,39 @@ breakage is FTE-only.
 **Omit it — the default is correct on both.** Use `cull none` only when a
 surface genuinely needs two sides.
 
-> Still outstanding: `hl_liquids.shader` (40 blocks) and `hl.shader` (1) still
-> carry `cull back`.
+> Still outstanding: `hl.shader` (1 block) still carries `cull back`.
+> `hl_liquids.shader` now uses `cull none`.
+
+### Water: `dp_water` on the `!` liquids
+
+`data/scripts/hl_liquids.shader` gives every `!` liquid a `dp_water` line:
+
+```
+dp_water reflectmin reflectmax refractdistort reflectdistort  refractRGB  reflectRGB  alpha
+```
+
+DarkPlaces draws the scene twice (reflection and refraction) and mixes them with
+a Fresnel term between `reflectmin` (looking straight down) and `reflectmax`
+(grazing). It needs `r_water 1`. Ripples come from a normal map named
+`<diffuse>_norm.png` beside the diffuse (`textures/liquids_extracted/`). The
+last value multiplies the alpha of the diffuse stage drawn on top, so a small
+number such as `0.125` leaves the water almost pure reflection and refraction,
+while `0.75` (murky and toxic liquids) lets the texture dominate.
+
+- The numbers are Xonotic's own water values. Clear and blue liquids share one
+  row; murky green (`gwater`, `rwater`, `watergreen`) and toxic liquids share
+  another.
+- DarkPlaces ignores `alphaGen const` on world surfaces and FTE ignores
+  `dp_water`, so the stage keeps `alphaGen const 0.65` as the FTE fallback.
+- `rgbGen identity` with no `$lightmap` stage makes the engine mark the
+  material fullbright. Dynamic and realtime lights then never light the water;
+  a rocket explosion only shows as a reflection. Stock DarkPlaces water with no
+  shader does get lit, and `rgbGen lightingDiffuse` did not change that in
+  testing.
+- The first definition of a shader name wins. A gamedir overlay that redefines a
+  liquid needs a file name that sorts before `hl_liquids.shader`.
+- `!toxicgrn` and `!toxicgrn2` (c0a0d, c1a4f, c1a4g, c1a4k) have no block, so
+  no water material applies to them.
 
 ### `tcGen environment` does nothing on skeletal models in FTE
 

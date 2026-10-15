@@ -264,7 +264,7 @@ void Bot_Balance()
 	if (cvar("gamemode") == MODE_SP) return;
 	Bot_Readopt();
 
-	float want = rint(cvar("bot_count"));
+	float want = rint(cvar("bot_quota"));
 	if (want < 0) want = 0;
 
 	float have = Bot_Count();

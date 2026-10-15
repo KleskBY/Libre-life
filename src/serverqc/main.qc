@@ -66,7 +66,7 @@ void StartFrame()
 	Hub_ConsumeArrival();
 	// Build the node graph the first frame after all info_node ents spawned.
 	NodeGraph_FrameCheck();
-	// Add or drop bots toward the bot_count cvar, one per call.
+	// Add or drop bots toward the bot_quota cvar, one per call.
 	Bot_Balance();
 	// Clear leftover "skin" "-1" on brush entities whose spawn skipped
 	if (!g_brushSkinsSanitized)
@@ -150,8 +150,8 @@ void Sprite_FrameManifestInit();	// env_sprite.qc
 void() worldspawn =
 {
 	// Bots. Registered here so the console knows the names before anyone types
-	// one; bot_count 0 means no bots until a server asks for them.
-	RegisterCvar("bot_count", "0");
+	// one; bot_quota 0 means no bots until a server asks for them.
+	RegisterCvar("bot_quota", "0");
 	RegisterCvar("bot_skill", "0.5");
 	RegisterCvar("bot_prefix", "[BOT] ");
 	RegisterCvar("bot_physics", "1");

@@ -68,9 +68,9 @@ void SV_ParseClientCommand(string s)
 		Flashlight_Toggle();
 		return;
 	}
-	if(cmd == "bot")
+	if(cmd == "bot" || cmd == "bot_add" || cmd == "bot_kick")
 	{
-		if (!SV_RequireHost("bot")) return;
+		if (!SV_RequireHost(cmd)) return;
 		Bot_Command();
 		return;
 	}

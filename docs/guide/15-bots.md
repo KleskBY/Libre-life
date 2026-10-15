@@ -1,6 +1,6 @@
 # Bots
 
-Multiplayer bots: `cmd bot add` fills a server, and `bot_count` keeps it filled.
+Multiplayer bots: `bot_add` fills a server, and `bot_quota` keeps it filled.
 They navigate a graph of their own, fight with the weapons they find, and are
 driven entirely from QC, because the engine gives a bot client no usercmd.
 
@@ -77,10 +77,11 @@ blacklisted for 30 seconds rather than walked at.
 
 | | |
 | --- | --- |
-| `cmd bot add [n]` / `remove [n]` / `kickall` | add or drop bots |
+| `bot_add [n]` | add `n` bots (default 1) and raise `bot_quota` to match |
+| `bot_kick [name]` | kick the named bot, or every bot with no argument, and lower `bot_quota` to match |
 | `cmd bot debug` / `stuckstats` | per bot state, and stuck accounting |
 | `cmd wp show\|stats\|near\|add\|del\|from\|to\|save\|load\|gen\|clear` | the waypoint editor |
-| `bot_count` | how many bots the balancer keeps |
+| `bot_quota` | how many bots the balancer keeps |
 | `bot_skill` | 0..1 baseline; each bot rolls this plus or minus 0.2 |
 | `bot_prefix` | netname prefix, default `[BOT] ` |
 | `bot_physics` | 1 velocity (default), 2 movement, 3 standard physics, 0 self measuring |
