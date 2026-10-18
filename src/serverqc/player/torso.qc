@@ -248,7 +248,9 @@ void Player_HitboxSync(entity p)
 		return;
 	}
 
-	if (p.deadflag != DEAD_NO || p.classname != "player")
+	// A non-solid or sizeless player (finale, intermission: setmodel "" zeroes the hull) gets no proxy; the inset box would be backwards.
+	if (p.deadflag != DEAD_NO || p.classname != "player" || p.solid == SOLID_NOT
+		|| p.maxs_x - p.mins_x <= 2 || p.maxs_z - p.mins_z <= 2)
 	{
 		if (p.hitbox_ent) p.hitbox_ent.solid = SOLID_NOT;   // the corpse is its own body
 		return;

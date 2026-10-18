@@ -121,10 +121,11 @@ normal culling for anything else, so the keyword is a no-op there and the
 breakage is FTE-only.
 
 **Omit it — the default is correct on both.** Use `cull none` only when a
-surface genuinely needs two sides.
+surface genuinely needs two sides. Liquids never do (see the water section
+below).
 
 > Still outstanding: `hl.shader` (1 block) still carries `cull back`.
-> `hl_liquids.shader` now uses `cull none`.
+> `hl_liquids.shader` has no cull line.
 
 ### Water: `dp_water` on the `!` liquids
 
@@ -145,8 +146,15 @@ while `0.75` (murky and toxic liquids) lets the texture dominate.
 - The numbers are Xonotic's own water values. Clear and blue liquids share one
   row; murky green (`gwater`, `rwater`, `watergreen`) and toxic liquids share
   another.
-- DarkPlaces ignores `alphaGen const` on world surfaces and FTE ignores
-  `dp_water`, so the stage keeps `alphaGen const 0.65` as the FTE fallback.
+- Never add `cull none` to a liquid. The compiler emits one face per side of a
+  liquid surface (c2a5 has 81 up-facing and 81 down-facing faces at the same
+  height), so drawing both sides gives coplanar pairs that z-fight from above.
+  FTE also draws the back face as an opaque plane when you are underwater.
+- FTE parses `dp_water` too, but builds its own `altwater` GLSL program from it:
+  blending is cleared, depth writing is forced, and the output is opaque
+  reflection plus refraction. DarkPlaces ignores `alphaGen const` on world
+  surfaces, so the stage keeps `alphaGen const 0.65` only for engines where the
+  program cannot run.
 - `rgbGen identity` with no `$lightmap` stage makes the engine mark the
   material fullbright. Dynamic and realtime lights then never light the water;
   a rocket explosion only shows as a reflection. Stock DarkPlaces water with no
@@ -185,6 +193,38 @@ on the rubberglove and worn-steel chrome families) cannot survive the swap.
 
 The full rationale, with the engine source quotes, is in the header comment of
 `data/scripts/chrome.shader`.
+
+### Shader catalog
+
+`tools/shader_catalog/` renders the shaders for the website. Everything it makes
+lands in `dist/shader-catalog/` (gitignored): stills, a 4 second clip for each
+animated shader, WebP copies, a `catalog.json` manifest and contact sheets.
+
+```
+python tools/shader_catalog/catalog.py setup      # textures, showroom map, q3map2 compile
+python tools/shader_catalog/catalog.py liquids    # every block of hl_liquids.shader
+python tools/shader_catalog/catalog.py zircon     # the samples in Zircon's zec_dev_waters
+python tools/shader_catalog/catalog.py sheet      # contact sheets
+```
+
+- **No third-party art.** The showroom map (`showroom.py`) and its textures
+  (`textures.py`) are generated from noise. Each liquid keeps its own `dp_water`
+  numbers and `tcMod` lines; only the diffuse is swapped for a noise stand-in
+  tinted to the mean colour of the original, and the ripples use a procedural
+  normal map. The previews therefore show what the shader does, not the Half-Life
+  art, and differ from the shipped `_norm.png` ripples.
+- **One launch per shader.** The engine caches shaders across `map`, so each
+  block is aliased onto the showroom's `textures/catalog/water` (or `fall` for
+  the `+` waterfall) through an overlay file that sorts before `catalog.shader`
+  (first definition wins), then rendered in a fresh process.
+- **Deterministic clips.** `cl_capturevideo` at 15 fps writes Ogg Theora under
+  `<gamedir>/video/`; ffmpeg turns it into MP4 and animated WebP. Clips of
+  scrolling water cannot loop seamlessly.
+- **q3map2 is needed once** for `setup` (`--q3map2` or the `Q3MAP2` variable).
+  Set `LIBRELIFE_EXE` to use another engine build.
+- **The `zircon` command reads Zircon's install** through a junction and writes
+  only into `dist/shader-catalog/zbase/`. Its shader scripts and textures keep
+  their own licences (see Zircon's `credits/` folder) and are not copied here.
 
 ## Lighting
 

@@ -14,7 +14,7 @@
 
 #define OBIT_SELF     1   // killed themselves
 #define OBIT_WORLD    2   // the map or a monster did it
-#define OBIT_HEAD     8   // the killing shot hit the head
+#define OBIT_HEAD     8   // the killing shot hit the head, sent but not drawn
 
 // Half-Life ships no death notice art, so a kill shows the weapon's own HUD
 // sprite, a death by the world shows the matching damage icon the HUD already
@@ -103,12 +103,12 @@ void Obituary_Draw()
 			if (iconW > fh * 6) iconW = fh * 6;
 		}
 
-		float head = !suicide && (flags & OBIT_HEAD);
-		float wHead = head ? stringwidth("HEADSHOT", FALSE, fv * 0.7) + gap * 0.5 : 0;
+		float wHead = 0;   // OBIT_HEAD is carried but not drawn: a headshot reads
+		                   // as an ordinary kill for now
 		float wVictim = stringwidth(victim, TRUE, fv);
 		float wKiller = (killer == "") ? 0 : stringwidth(killer, TRUE, fv) + gap;
 		float width = pad + wKiller + iconW + wHead + gap + wVictim + pad;
-		if (pic == "" && !head) width = width + gap;
+		if (pic == "") width = width + gap;
 
 		vector at = [rightEdge - width + slide, y];
 		float involved = (killer == me) || (victim == me);
@@ -117,9 +117,10 @@ void Obituary_Draw()
 		if (involved)
 		{
 			vector edge = (victim == me) ? '0.85 0.25 0.2' : '1 0.8 0.35';
-			drawfill(at, [width, 1], edge, 0.8 * a, 0);
-			drawfill(at + [0, rowH - 1], [width, 1], edge, 0.8 * a, 0);
-			drawfill(at, [fh * 0.2, rowH], edge, 0.9 * a, 0);
+			drawfill(at, [width, 1], edge, 0.8 * a, 0);                    // top
+			drawfill(at + [0, rowH - 1], [width, 1], edge, 0.8 * a, 0);    // bottom
+			drawfill(at + [width - 1, 0], [1, rowH], edge, 0.8 * a, 0);    // right
+			drawfill(at, [fh * 0.2, rowH], edge, 0.9 * a, 0);              // left, thicker
 		}
 
 		vector pen = at + [pad, (rowH - fh) * 0.5];
@@ -136,12 +137,6 @@ void Obituary_Draw()
 			pen_x = pen_x + iconW;
 		}
 
-		if (head)
-		{
-			pen_x = pen_x + gap * 0.5;
-			drawstring([pen_x, pen_y + fh * 0.15], "HEADSHOT", fv * 0.7, '1 0.75 0.3', a, 0);
-			pen_x = pen_x + stringwidth("HEADSHOT", FALSE, fv * 0.7);
-		}
 		pen_x = pen_x + gap;
 
 		drawstring(pen, victim, fv, (victim == me) ? '1 0.85 0.4' : '0.92 0.92 0.88', a, 0);

@@ -2,8 +2,11 @@
 // mixed by a Fresnel term, ripples from <texture>_norm.png beside the diffuse,
 // and r_water 1 required. The stage alpha is multiplied by the last dp_water
 // value, so small numbers leave the diffuse almost invisible.
-// DarkPlaces ignores alphaGen const on world surfaces and FTE ignores dp_water,
-// so alphaGen const stays as the FTE fallback.
+// No cull line on purpose: the compiler emits one face per side of a liquid
+// surface, so cull none draws coplanar pairs that z-fight, and FTE draws the
+// back face as an opaque plane underwater.
+// FTE turns dp_water into its own opaque altwater program, so alphaGen const
+// only matters where that cannot run. DarkPlaces ignores it on world surfaces.
 // rgbGen identity makes the surface fullbright: dynamic lights show as a
 // reflection on the water, they never light it.
 // The first definition of a name wins, so a gamedir overlay must use a file
@@ -17,7 +20,6 @@
 	surfaceparm nomarks
 	surfaceparm trans
 	surfaceparm nolightmap
-	cull none
 	{
 		map textures/liquids_extracted/bwater1.png
 		rgbGen identity
@@ -39,7 +41,6 @@
 	surfaceparm nomarks
 	surfaceparm trans
 	surfaceparm nolightmap
-	cull none
 	{
 		map textures/liquids_extracted/bwater2.png
 		rgbGen identity
@@ -61,7 +62,6 @@
 	surfaceparm nomarks
 	surfaceparm trans
 	surfaceparm nolightmap
-	cull none
 	{
 		map textures/liquids_extracted/bwater3.png
 		rgbGen identity
@@ -84,7 +84,6 @@
 	surfaceparm nomarks
 	surfaceparm trans
 	surfaceparm nolightmap
-	cull none
 	{
 		map textures/liquids_extracted/water1.png
 		rgbGen identity
@@ -106,7 +105,6 @@
 	surfaceparm nomarks
 	surfaceparm trans
 	surfaceparm nolightmap
-	cull none
 	{
 		map textures/liquids_extracted/water2a.png
 		rgbGen identity
@@ -128,7 +126,6 @@
 	surfaceparm nomarks
 	surfaceparm trans
 	surfaceparm nolightmap
-	cull none
 	{
 		map textures/liquids_extracted/water2b.png
 		rgbGen identity
@@ -150,7 +147,6 @@
 	surfaceparm nomarks
 	surfaceparm trans
 	surfaceparm nolightmap
-	cull none
 	{
 		map textures/liquids_extracted/water2c.png
 		rgbGen identity
@@ -173,7 +169,6 @@
 	surfaceparm nomarks
 	surfaceparm trans
 	surfaceparm nolightmap
-	cull none
 	{
 		map textures/liquids_extracted/c2a5.png
 		rgbGen identity
@@ -196,7 +191,6 @@
 	surfaceparm nomarks
 	surfaceparm trans
 	surfaceparm nolightmap
-	cull none
 	{
 		map textures/liquids_extracted/c2a52.png
 		rgbGen identity
@@ -219,7 +213,6 @@
 	surfaceparm nomarks
 	surfaceparm trans
 	surfaceparm nolightmap
-	cull none
 	{
 		map textures/liquids_extracted/c2a52b.png
 		rgbGen identity
@@ -241,7 +234,6 @@
 	surfaceparm nomarks
 	surfaceparm trans
 	surfaceparm nolightmap
-	cull none
 	{
 		map textures/liquids_extracted/c2a53.png
 		rgbGen identity
@@ -264,7 +256,6 @@
 	surfaceparm nomarks
 	surfaceparm trans
 	surfaceparm nolightmap
-	cull none
 	{
 		map textures/liquids_extracted/c2a54.png
 		rgbGen identity
@@ -287,7 +278,6 @@
 	surfaceparm nomarks
 	surfaceparm trans
 	surfaceparm nolightmap
-	cull none
 	{
 		map textures/liquids_extracted/c2a542.png
 		rgbGen identity
@@ -310,7 +300,6 @@
 	surfaceparm nomarks
 	surfaceparm trans
 	surfaceparm nolightmap
-	cull none
 	{
 		map textures/liquids_extracted/c2a54b.png
 		rgbGen identity
@@ -334,7 +323,6 @@
 	surfaceparm nomarks
 	surfaceparm trans
 	surfaceparm nolightmap
-	cull none
 	{
 		map textures/liquids_extracted/gwater1.png
 		rgbGen identity
@@ -355,7 +343,6 @@
 	surfaceparm nomarks
 	surfaceparm trans
 	surfaceparm nolightmap
-	cull none
 	{
 		map textures/liquids_extracted/gwater2.png
 		rgbGen identity
@@ -376,7 +363,6 @@
 	surfaceparm nomarks
 	surfaceparm trans
 	surfaceparm nolightmap
-	cull none
 	{
 		map textures/liquids_extracted/gwater3.png
 		rgbGen identity
@@ -397,7 +383,6 @@
 	surfaceparm nomarks
 	surfaceparm trans
 	surfaceparm nolightmap
-	cull none
 	{
 		map textures/liquids_extracted/gwater4a.png
 		rgbGen identity
@@ -418,7 +403,6 @@
 	surfaceparm nomarks
 	surfaceparm trans
 	surfaceparm nolightmap
-	cull none
 	{
 		map textures/liquids_extracted/gwater4b.png
 		rgbGen identity
@@ -439,7 +423,6 @@
 	surfaceparm nomarks
 	surfaceparm trans
 	surfaceparm nolightmap
-	cull none
 	{
 		map textures/liquids_extracted/gwater5.png
 		rgbGen identity
@@ -460,7 +443,6 @@
 	surfaceparm nomarks
 	surfaceparm trans
 	surfaceparm nolightmap
-	cull none
 	{
 		map textures/liquids_extracted/gwater5b.png
 		rgbGen identity
@@ -481,7 +463,6 @@
 	surfaceparm nomarks
 	surfaceparm trans
 	surfaceparm nolightmap
-	cull none
 	{
 		map textures/liquids_extracted/gwater6.png
 		rgbGen identity
@@ -503,7 +484,6 @@
 	surfaceparm nomarks
 	surfaceparm trans
 	surfaceparm nolightmap
-	cull none
 	{
 		map textures/liquids_extracted/rwater1.png
 		rgbGen identity
@@ -524,7 +504,6 @@
 	surfaceparm nomarks
 	surfaceparm trans
 	surfaceparm nolightmap
-	cull none
 	{
 		map textures/liquids_extracted/rwater2.png
 		rgbGen identity
@@ -545,7 +524,6 @@
 	surfaceparm nomarks
 	surfaceparm trans
 	surfaceparm nolightmap
-	cull none
 	{
 		map textures/liquids_extracted/rwater3.png
 		rgbGen identity
@@ -567,7 +545,6 @@
 	surfaceparm nomarks
 	surfaceparm trans
 	surfaceparm nolightmap
-	cull none
 	{
 		map textures/liquids_extracted/radio.png
 		rgbGen identity
@@ -623,7 +600,6 @@ scrolltoxic
 	surfaceparm nomarks
 	surfaceparm trans
 	surfaceparm nolightmap
-	cull none
 	{
 		map textures/liquids_extracted/water2a.png
 		rgbGen identity
@@ -645,7 +621,6 @@ scrolltoxic
 	surfaceparm nomarks
 	surfaceparm trans
 	surfaceparm nolightmap
-	cull none
 	{
 		map textures/liquids_extracted/water2b.png
 		rgbGen identity
@@ -667,7 +642,6 @@ scrolltoxic
 	surfaceparm nomarks
 	surfaceparm trans
 	surfaceparm nolightmap
-	cull none
 	{
 		map textures/liquids_extracted/water2c.png
 		rgbGen identity
@@ -690,7 +664,6 @@ scrolltoxic
 	surfaceparm nomarks
 	surfaceparm trans
 	surfaceparm nolightmap
-	cull none
 	{
 		map textures/liquids_extracted/bwater1.png
 		rgbGen identity
@@ -713,7 +686,6 @@ scrolltoxic
 	surfaceparm nomarks
 	surfaceparm trans
 	surfaceparm nolightmap
-	cull none
 	{
 		map textures/liquids_extracted/gwater1.png
 		rgbGen identity
@@ -735,7 +707,6 @@ scrolltoxic
 	surfaceparm nomarks
 	surfaceparm trans
 	surfaceparm nolightmap
-	cull none
 	{
 		map textures/liquids_extracted/scrolltoxic.png
 		rgbGen identity
@@ -757,7 +728,6 @@ scrolltoxic
 	surfaceparm nomarks
 	surfaceparm trans
 	surfaceparm nolightmap
-	cull none
 	{
 		map textures/liquids_extracted/gwater5.png
 		rgbGen identity
@@ -779,7 +749,6 @@ scrolltoxic
 	surfaceparm nomarks
 	surfaceparm trans
 	surfaceparm nolightmap
-	cull none
 	{
 		map textures/liquids_extracted/c2a53.png
 		rgbGen identity
@@ -801,7 +770,6 @@ scrolltoxic
 	surfaceparm nomarks
 	surfaceparm trans
 	surfaceparm nolightmap
-	cull none
 	{
 		map textures/liquids_extracted/c2a542.png
 		rgbGen identity
@@ -824,7 +792,6 @@ scrolltoxic
 	surfaceparm nomarks
 	surfaceparm trans
 	surfaceparm nolightmap
-	cull none
 	{
 		map textures/liquids_extracted/water1.png
 		rgbGen identity
@@ -846,7 +813,6 @@ scrolltoxic
 	surfaceparm nomarks
 	surfaceparm trans
 	surfaceparm nolightmap
-	cull none
 	{
 		map textures/liquids_extracted/water1.png
 		rgbGen identity
@@ -868,7 +834,6 @@ scrolltoxic
 	surfaceparm nomarks
 	surfaceparm trans
 	surfaceparm nolightmap
-	cull none
 	{
 		map textures/liquids_extracted/water2c.png
 		rgbGen identity
