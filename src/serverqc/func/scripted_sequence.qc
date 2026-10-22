@@ -674,7 +674,8 @@ void ScriptedSeq_ReleaseMonster()
     {
         mon.movetype = self.ss_saved_movetype;
         mon.solid    = self.ss_saved_solid;
-        mon.effects  = self.ss_saved_effects;
+        float animBits = EF_NOINTERP | EF_RESTARTANIM_BIT;
+        mon.effects  = (self.ss_saved_effects - (self.ss_saved_effects & animBits)) | (mon.effects & animBits);
         mon.framerate = 1;
         mon.monster_cine  = world;
         mon.monster_scriptState = SCRIPT_CLEANUP;
@@ -693,7 +694,6 @@ void ScriptedSeq_ReleaseMonster()
             mon.monster_state      = MONSTERSTATE_DEAD;
             mon.monster_idealState = MONSTERSTATE_DEAD;
             setsize(mon, mon.mins, [mon.maxs_x, mon.maxs_y, mon.mins_z + 2]);
-            mon.effects = mon.effects | EF_NOINTERP;
 
             mon.use   = SUB_Null;
             mon.usehl = __NULL__;

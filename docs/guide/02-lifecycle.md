@@ -6,10 +6,11 @@ step in this sequence.
 ## Boot → player standing in the world
 
 ```mermaid
+%%{init: {"sequence": {"messageAlign": "left"}}}%%
 sequenceDiagram
     autonumber
-    participant E as Engine
     participant MN as MENUQC<br/>menu.dat
+    participant E as Engine
     participant SV as SVQC<br/>progs.dat
     participant CL as CSQC<br/>csprogs.dat
 

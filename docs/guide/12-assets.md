@@ -226,6 +226,60 @@ python tools/shader_catalog/catalog.py sheet      # contact sheets
   only into `dist/shader-catalog/zbase/`. Its shader scripts and textures keep
   their own licences (see Zircon's `credits/` folder) and are not copied here.
 
+## World textures
+
+Half-Life maps take their pixels from WADs (`halflife.wad`, `xeno.wad`,
+`liquids.wad`, packed in `data/halflife_wads.pk3`). A loose PNG of the same name
+overrides them without touching the WAD or the BSP.
+
+Zircon resolves a BSP texture in this order (`model_brush.c`, texture loading):
+
+1. a q3 shader named after the texture (`data/scripts/*.shader`)
+2. `textures/<mapname>/<name>.png`, a per-map variant
+3. `textures/<name>.png`
+4. the BSP's embedded copy, then the WAD
+
+So a replacement wins over both the WAD and an embedded copy, and a name that has
+a shader never reaches the PNG. FTE's lookup has not been checked; test it.
+
+```
+python tools/hl_textures.py stage            # extract + collect, data/ untouched
+python tools/hl_textures.py install <dir>    # copy replacements into data/textures
+python tools/hl_textures.py status           # how many names are replaced
+```
+
+`stage` unpacks the WADs into `.hltex/wad/`, runs WadMaker on each
+(`WADMAKER` or `--wadmaker` points at `WadMaker.exe`), and collects the textures
+the shipped BSPs reference as lowercase PNGs in `.hltex/textures/`, with
+`manifest.json` and `manifest.csv` (name, source WAD, class, size, maps using it).
+`.hltex/` is gitignored, like every `*.png`; converted Valve copies stay local.
+The manifest is the work list for replacements. Tool textures (`sky`, `clip`,
+`origin`, `aaatrigger`), names that already have a shader, the `!` liquids and the
+textures embedded only in community maps are listed but not staged.
+
+`install` refuses a replacement that would break the material:
+
+- the name must be in the manifest (a typo would silently never load)
+- same aspect ratio as the original; any resolution works, because texcoords use
+  the size stored in the BSP, not the PNG
+- opaque textures must be fully opaque. One pixel under alpha 255 turns the
+  surface into a blended material
+- `{` textures keep a real alpha cutout, they are alpha tested
+- a file already in `data/textures/` (any of png, tga, jpg, dds) is skipped, so
+  existing files and earlier replacements are never clobbered; `--force`
+  replaces only an existing `.png`
+
+Rules for the art itself:
+
+- lowercase file name equal to the texture name, e.g. `+0button1.png`, `{bars.png`
+- `+0name`, `+1name` ... are separate PNGs, one per frame; `-0name` is plain
+- under transparent pixels keep the neighbouring colour instead of black or blue,
+  or fences get a dark fringe when mipmapped
+- liquids (`!`) are shader driven: replace `textures/liquids_extracted/<name>.png`
+  and its `_norm.png`, not a flat file
+- `data/textures/` is shared by every gamedir whose base game is `data`, and by
+  `tools/web_build.py`, so large replacements grow those too
+
 ## Lighting
 
 `data/maps/*.rtlights` supply real-time lights for all 131 Half-Life maps,
