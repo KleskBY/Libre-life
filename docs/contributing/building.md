@@ -95,6 +95,52 @@ Exits non-zero if `docs/reference/` no longer matches the source. Fix with
 | --- | --- |
 | `python tools/gen_rtlights.py` | regenerate `data/maps/*.rtlights` |
 
+## Steam bridge
+
+`librelife.exe` gets Steam from `steambridge64.dll`, built from the
+`tools/SteamBridge` submodule. How Libre-life uses it is in
+[18 — Steam](../guide/18-steam.md); this section is only about producing and
+packaging the files.
+
+The repo root needs three files beside `librelife.exe`:
+
+| File | In git? | Where it comes from |
+| --- | --- | --- |
+| `steam_appid.txt` | yes | contains `480`, Valve's Spacewar test app |
+| `steambridge64.dll` | no (`/*.dll` is ignored) | built below |
+| `steam_api64.dll` | no | Steamworks SDK, `redistributable_bin/win64/` |
+
+### Rebuilding `steambridge64.dll`
+
+Needs Visual Studio 2022 (C++ desktop workload) and the Steamworks SDK, which
+is not redistributed: download it from the Steamworks partner site and unpack it
+into `tools/SteamBridge/sdk/` so that `sdk/public/steam/steam_api.h` and
+`sdk/redistributable_bin/win64/steam_api64.lib` exist. The DLL in use is built
+against SDK 1.62.
+
+```bash
+cd tools/SteamBridge
+"/c/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/MSBuild.exe" SteamBridge.sln -p:Configuration=Release -p:Platform=x64
+cp x64/Release/steambridge64.dll ../../
+cp sdk/redistributable_bin/win64/steam_api64.dll ../../
+```
+
+Two `MSB8012` warnings about `TargetName` are expected (the linker appends `64`
+to the name on purpose). Every function the engine resolves must be exported;
+`dumpbin /exports x64/Release/steambridge64.dll` should list the 20 `SB_*`
+names in the bridge's `docs/API.md`.
+
+### Packaging
+
+`tools/QuakeGameBuilder/builder_config.json` includes `../steambridge64.dll`,
+`../steam_api64.dll` and `../steam_appid.txt`, so a build copies all three into
+its root. If one is missing from the repo root, the build stops with
+`Include path not found` instead of quietly producing a build without Steam.
+
+To check a build, run its `librelife.exe` with the Steam client logged in: the
+console should print `Steam: successfully initialized`, and Steam should show
+you as playing Spacewar.
+
 ## fteqcc gotchas
 
 - **No string `<` / `>`.** Use `str2chr(s, i)` and compare the ints.

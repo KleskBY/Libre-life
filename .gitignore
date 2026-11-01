@@ -19,6 +19,7 @@ desktop.ini
 tools/*
 !tools/mdl2iqm
 !tools/QuakeGameBuilder
+!tools/SteamBridge
 !tools/convert_nod.pl
 !tools/gen_rtlights.py
 !tools/qc_common.py
@@ -129,7 +130,7 @@ stable_engine (use this if you have problems).bat
 /restriction
 /restriction.fmf
 /restriction_*.bat
-steam_appid.txt
+/objectn/
 
 # Webport
 /work

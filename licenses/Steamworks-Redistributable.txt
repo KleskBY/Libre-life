@@ -1,0 +1,15 @@
+steam_api64.dll
+
+Steamworks API runtime library, Steamworks SDK version 1.62.
+
+Copyright Valve Corporation. All rights reserved.
+
+steam_api64.dll is the redistributable binary from the Steamworks SDK
+(sdk/redistributable_bin/win64/). It is not open source and is not covered by
+the GNU GPL. It is distributed under the terms of the Steamworks SDK Access
+Agreement:
+
+    https://partner.steamgames.com/documentation/sdk_access_agreement
+
+The Steamworks SDK itself (headers and import libraries) is not included in
+this repository or in Libre-life builds.

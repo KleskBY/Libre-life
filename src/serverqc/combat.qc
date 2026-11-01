@@ -576,35 +576,35 @@ void Combat_TraceAttack(float damage, vector dir, float dmgType)
 
 	if(hitEnt.takedamage)
 	{
-		// Where the shot landed decides the damage, and leaves .hitbox for the
-		// monsters that read it. The stamp says the zone is from THIS frame:
-		// an explosion sets no zone, and a stale one would read as a headshot.
 		damage = Combat_DetectHitbox(damage);
 		hitEnt.hitbox_time = time;
 
+		float owned = FALSE;
 		if(hitEnt.traceAttack)
 		{
 			entity oself = self;
 			self = hitEnt;
 			self.traceAttack(oself, damage, dir, dmgType);
 			self = oself;
+			owned = TRUE;
 		}
 
 		float bloodColor = Blood_ColorFor(hitEnt);
 		if (bloodColor)
 		{
+			if (owned) return;
 			Blood_SpawnImpact(org, dir, bloodColor, damage);
 			Blood_TraceBleed(hitEnt, trace_endpos, dir, damage, dmgType);
 		}
 		else
 		{
-			if(self.weapon == WEAPON_CROWBAR) te_spike(org);
+			if (dmgType & DMG_CLUB) te_spike(org);
 			else te_gunshot(org);
 			if (hitEnt.monster_bloodColor < 0)
 				te_spark(org, -dir, Math_RandomInt(3, 8));
 		}
 
-		AddMultiDamage(hitEnt, damage, dmgType);
+		if (!owned) AddMultiDamage(hitEnt, damage, dmgType);
 	}
 	else if(hitEnt.solid == SOLID_CORPSE)
 	{
@@ -622,7 +622,7 @@ void Combat_TraceAttack(float damage, vector dir, float dmgType)
 	}
 	else
 	{
-		if(self.weapon == WEAPON_CROWBAR) te_spike(org);
+		if (dmgType & DMG_CLUB) te_spike(org);
 		else te_gunshot(org);
 	}
 };

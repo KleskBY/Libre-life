@@ -4,3 +4,6 @@
 [submodule "tools/mdl2iqm"]
 	path = tools/mdl2iqm
 	url = https://github.com/KleskBY/MDL2IQM.git
+[submodule "tools/SteamBridge"]
+	path = tools/SteamBridge
+	url = https://github.com/KleskBY/Steam-SDK-Bridge-for-DarkPlaces.git

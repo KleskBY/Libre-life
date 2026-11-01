@@ -1,0 +1,14 @@
+steambridge64.dll
+
+SteamBridge, a Steamworks bridge for DarkPlaces-derived engines.
+
+Author:  KleskBY
+Source:  https://github.com/KleskBY/Steam-SDK-Bridge-for-DarkPlaces
+         (pinned in this repository as the tools/SteamBridge submodule)
+License: GNU General Public License, version 3
+
+The full license text is in gpl-3.0.txt in this directory.
+
+steambridge64.dll links against Valve's Steamworks SDK and loads
+steam_api64.dll at runtime. The Steamworks SDK is not part of SteamBridge and
+is not covered by this license; see Steamworks-Redistributable.txt.

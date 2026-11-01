@@ -30,6 +30,7 @@ Read in order the first time; each page assumes the ones before it.
 | 15 | [Bots](guide/15-bots.md) | multiplayer bots: the brain entity, their own waypoint graph, scored decisions, cvars and commands |
 | 16 | [Experimental web port](guide/16-web-port.md) | local FTE WebAssembly build, packaging, browser testing and limitations |
 | 17 | [Android port](guide/17-android-port.md) | the Zircon Android shell in `android/`: flavors, engine patches, touch controls, content delivery, what Libre-life still needs |
+| 18 | [Steam](guide/18-steam.md) | the SteamBridge DLL, app ID 480 test builds, relay multiplayer, the Steam builtins from QuakeC |
 
 ## Reference — generated from the source
 

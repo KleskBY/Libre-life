@@ -97,6 +97,8 @@ The UI font is included: `data/gfx/font.ttf` is DejaVu Sans, redistributed under
 
 Engine builds ship `bin64/zlib1.dll` (zlib 1.2.11) under the zlib license (see [`licenses/zlib-License.txt`](licenses/zlib-License.txt)).
 
+Windows builds ship `steambridge64.dll` from [SteamBridge](https://github.com/KleskBY/Steam-SDK-Bridge-for-DarkPlaces) under the GPL v3 (see [`licenses/SteamBridge-License.txt`](licenses/SteamBridge-License.txt)) and Valve's `steam_api64.dll` from the Steamworks SDK under Valve's terms (see [`licenses/Steamworks-Redistributable.txt`](licenses/Steamworks-Redistributable.txt)), plus a `steam_appid.txt` set to the test app ID 480. See the [Steam guide](docs/guide/18-steam.md).
+
 ## Tooling
 
 An experimental FTEQW WebAssembly launcher is available. Run
@@ -108,6 +110,7 @@ Development helpers live under `tools/` as pinned submodules:
 
 - `tools/QuakeGameBuilder` — a Python/PyQt6 tool that scans the QuakeC source and assets and copies only what a build actually uses into a clean package. Install its one dependency with `pip install PyQt6`, then run `tools/QuakeGameBuilder/run.bat` (GUI) or `python tools/QuakeGameBuilder/quakebuild.py` (CLI). See its own README for configuration details.
 - `tools/mdl2iqm` — converts Half-Life `.mdl` models to the engine's IQM format.
+- `tools/SteamBridge` — the source of `steambridge64.dll`, the Windows DLL that gives the engine Steam (relay multiplayer, invites, achievements) without linking the Steamworks SDK into the engine. Build steps are in [building.md](docs/contributing/building.md#steam-bridge); its own `docs/` cover the API, engine hooks and QuakeC usage.
 
 `tools/gen_rtlights.py` generates DarkPlaces `.rtlights` from Half-Life BSP maps (`python tools/gen_rtlights.py --maps-dir <your Half-Life/valve/maps>`).
 
